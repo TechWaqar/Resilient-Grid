@@ -1,67 +1,73 @@
-# ⚡ Resilient-Grid
+# Resilient-Grid — Edge-AI Electrical Anomaly Detection
 
-## Edge-Oriented AI for Electrical Anomaly Detection
+An end-to-end machine learning system for detecting abnormal electrical behavior and supporting intelligent monitoring of micro-grid environments.
 
-Resilient-Grid is a machine-learning research prototype for detecting abnormal electrical operating conditions from simulated voltage, current, temperature, and power sensor data.
+The project simulates electrical sensor data, performs temporal feature engineering, trains and evaluates machine learning models, exposes predictions through a FastAPI service, and provides Streamlit monitoring dashboards.
 
-The project explores how temporal feature engineering and machine learning can be used to identify abnormal electrical behavior in a near-real-time monitoring scenario.
 
----
+## Project Objective
 
-## 🎯 Project Objective
+Electrical systems can develop abnormal behavior before a serious failure occurs.
 
-The objective of Resilient-Grid is to build an AI-based monitoring pipeline that can:
+The goal of Resilient-Grid is to investigate whether machine learning can identify abnormal electrical patterns from sensor measurements such as:
 
-- simulate electrical sensor readings
-- detect abnormal operating conditions
-- engineer temporal features from previous readings
-- compare multiple machine-learning approaches
-- expose the trained model through an API
-- visualize predictions through a web dashboard
-- simulate live electrical monitoring
-- analyze which features influence the model
-- document model limitations and detection gaps
+- Voltage
+- Current
+- Temperature
+- Power
 
-This is a research and portfolio prototype rather than a production electrical safety system.
+The project focuses on a complete machine learning workflow:
+
+**Data → Feature Engineering → Model Training → Evaluation → API → Dashboard → Testing → Research Analysis**
 
 ---
 
-# 🧠 System Architecture
+## Core Idea
+
+The system receives electrical measurements and transforms them into temporal features that describe both the current state and recent behavior of the system.
+
+The final V7 model uses a Random Forest classifier with:
+
+- Current electrical measurements
+- Short-term changes
+- Causal rolling statistics
+- Deviations from recent operating conditions
+- Percentage deviations
+
+The temporal rolling features are calculated using **previous observations only**, making the feature-engineering approach more appropriate for online monitoring.
+
+---
+
+## System Architecture
 
 ```text
 Simulated Electrical Sensors
-          │
-          ▼
-Voltage / Current / Temperature / Power
-          │
-          ▼
-Temporal Feature Engineering
-          │
-          ├── Changes
-          ├── Rolling Means
-          ├── Rolling Standard Deviations
-          ├── Deviations
-          └── Percentage Deviations
-          │
-          ▼
-StandardScaler
-          │
-          ▼
-Random Forest V7
-          │
-          ▼
-Anomaly Probability
-          │
-          ▼
-Decision Threshold
-          │
-          ├── NORMAL
-          │
-          └── ANOMALY
-          │
-          ▼
-FastAPI
-          │
-          ├── Streamlit Dashboard
-          │
-          └── Live Monitor
+            │
+            ▼
+   Voltage / Current /
+ Temperature / Power
+            │
+            ▼
+   Data Generation
+            │
+            ▼
+ Temporal Feature Engineering
+            │
+            ▼
+  Causal Rolling Features
+            │
+            ▼
+ Random Forest Classifier
+            │
+            ▼
+    Anomaly Probability
+            │
+       ┌────┴────┐
+       ▼         ▼
+   FastAPI    Streamlit
+     API       Dashboard
+       │         │
+       └────┬────┘
+            ▼
+      Monitoring /
+     Model Analysis
