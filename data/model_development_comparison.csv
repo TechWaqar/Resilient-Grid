@@ -1,0 +1,6 @@
+model,features,accuracy,precision,recall,f1,notes
+V3 Random Forest,4,0.926,0.828,0.62,0.709,Original sensor features
+V4 Isolation Forest,4,0.884,0.631,0.494,0.554,Normal-only training
+V5 Random Forest,16,0.96,0.911,0.789,0.845,Feature engineering
+V6 Random Forest,24,0.965,0.962,0.791,0.868,Extended deviation features
+V7 Random Forest,24,0.967,0.979,0.794,0.877,Causal rolling features

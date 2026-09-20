@@ -1,0 +1,6 @@
+fault_type,total_samples,detected,missed,detection_rate
+combined_fault,70,70,0,1.0
+electrical_disturbance,20,20,0,1.0
+overheating,80,76,4,0.95
+power_abnormality,80,71,9,0.8875
+sensor_drift,100,51,49,0.51
