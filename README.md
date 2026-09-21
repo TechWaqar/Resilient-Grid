@@ -1,4 +1,4 @@
-# Resilient-Grid — Edge-AI Electrical Anomaly Detection
+# Resilient-Grid Edge-AI Electrical Anomaly Detection
 
 An end-to-end machine learning system for detecting abnormal electrical behavior and supporting intelligent monitoring of micro-grid environments.
 
