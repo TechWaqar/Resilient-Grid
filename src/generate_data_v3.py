@@ -27,10 +27,6 @@ voltage += 2 * np.sin(time / 300)
 current += 0.8 * np.sin(time / 200)
 temperature += 1.5 * np.sin(time / 500)
 
-# ============================================================
-# INITIALIZE LABELS
-# ============================================================
-
 anomaly = np.zeros(N, dtype=int)
 fault_type = np.array(["normal"] * N, dtype=object)
 
@@ -38,14 +34,13 @@ fault_type = np.array(["normal"] * N, dtype=object)
 # ============================================================
 # FAULT 1: VOLTAGE DEGRADATION
 # Two occurrences: training + future test
-# Gradual mild -> severe degradation
 # ============================================================
 
 # First occurrence
 start = 1200
 end = 1260
 
-voltage[start:end] -= np.linspace(5, 35, end - start)
+voltage[start:end] -= np.linspace(3, 25, end - start)
 
 anomaly[start:end] = 1
 fault_type[start:end] = "voltage_degradation"
@@ -55,7 +50,7 @@ fault_type[start:end] = "voltage_degradation"
 start = 7200
 end = 7260
 
-voltage[start:end] -= np.linspace(5, 35, end - start)
+voltage[start:end] -= np.linspace(3, 25, end - start)
 
 anomaly[start:end] = 1
 fault_type[start:end] = "voltage_degradation"
@@ -271,13 +266,6 @@ print(
     df[df["fault_type"] == "voltage_degradation"]
     [["timestamp", "voltage", "current", "temperature", "power"]]
     .head(10)
-)
-
-print("\nVoltage degradation statistics:")
-print(
-    df[df["fault_type"] == "voltage_degradation"]
-    [["voltage", "current", "temperature", "power"]]
-    .describe()
 )
 
 print(f"\nSaved to: {output_path}")

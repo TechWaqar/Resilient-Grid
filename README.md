@@ -1,9 +1,10 @@
-# Resilient-Grid Edge-AI Electrical Anomaly Detection
+# Resilient-Grid — Edge-AI Electrical Anomaly Detection
 
 An end-to-end machine learning system for detecting abnormal electrical behavior and supporting intelligent monitoring of micro-grid environments.
 
 The project simulates electrical sensor data, performs temporal feature engineering, trains and evaluates machine learning models, exposes predictions through a FastAPI service, and provides Streamlit monitoring dashboards.
 
+---
 
 ## Project Objective
 
@@ -44,30 +45,42 @@ The temporal rolling features are calculated using **previous observations only*
 Simulated Electrical Sensors
             │
             ▼
-   Voltage / Current /
- Temperature / Power
+Voltage / Current / Temperature / Power
             │
             ▼
-   Data Generation
+Data Generation
             │
             ▼
- Temporal Feature Engineering
+Temporal Feature Engineering
+            │
+            ├── Changes
+            ├── Rolling Means
+            ├── Rolling Standard Deviations
+            ├── Deviations
+            └── Percentage Deviations
             │
             ▼
-  Causal Rolling Features
+StandardScaler
             │
             ▼
- Random Forest Classifier
+Random Forest V7
             │
             ▼
-    Anomaly Probability
+Anomaly Probability
             │
-       ┌────┴────┐
-       ▼         ▼
-   FastAPI    Streamlit
-     API       Dashboard
-       │         │
-       └────┬────┘
             ▼
-      Monitoring /
-     Model Analysis
+Decision Threshold
+            │
+            ├── NORMAL
+            │
+            └── ANOMALY
+            │
+            ▼
+FastAPI
+            │
+            ├── Streamlit Dashboard
+            │
+            └── Live Monitor
+            │
+            ▼
+Monitoring / Model Analysis
